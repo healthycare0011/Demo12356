@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order</title>
+  <style>
+ body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  margin: 20px;
+}
+
+form {
+  width: 300px; /* Increased width */
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px; /* Increased padding */
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green color on hover */
+}
+
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  flex-shrink: 0; /* Prevent the footer from shrinking */
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.product-item-name {
+  flex: 1;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Order</h1>
+    <nav>
+      <ul>
+        <li><a href="123.html">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <form id="orderForm">
+      <form action="https://formsubmit.co/healthycare.info.bd@gmail.com" method="POST">
+  <form>
+      <div id="productDetails">
+        <!-- Product names will be displayed here -->
+         <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
+
+    <label for="district">জেলা:</label>
+    <input type="text" id="district" name="district" placeholder="Enter your district" required>
+
+    <label for="thana">থানা বা সদর:</label>
+    <input type="text" id="thana" name="thana" placeholder="Enter your thana" required>
+
+    <label for="address">বাসার এড্রেস বা যেখান থেকে প্রোডাক্ট রিসিভ করবেন</label>
+    <input type="text" id="address" name="address" placeholder="Enter your address" required>
+        <img src="https://raw.githubusercontent.com/healthycare0011/photo/main/20240207_174404.jpg " alt="" width="300px" height="80px">
+    </a>
+<h2> অর্ডার কনফার্ম করতে নিচের দেয়া নাম্বারে অগ্রিম ১৫০৳ ডেলিভারি চার্জ পেমেন্ট করুন।<h2>
+<p>01644366623 Bkash/Nagad personal (only send money)</p>
+  সেন্ড মানি করার পর নিচে বিকাশ অথবা নগদ সিলেক্ট করুন এবং transection নাম্বার টি বসিয়ে দিন
+<h2>Choose Payment Method:</h2>
+    <label for="payment_method">Choose a payment method:</label>
+  <select id="payment_method" name="payment_method" required>
+    <option value="">Select</option>
+    <option value="bkash">BKash</option>
+    <option value="nagad">Nagad</option>
+  </select>
+</p>
+  <label for="Trx id">Trasection id</label>
+    <input type="text" id="thana" name="thana" placeholder="Enter trx id" required>
+
+    <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" value="" readonly><br>
+        
+        <label for="totalAmount">Total Amount:ডেলিভারি চার্জ ছাড়া</label>
+        <input type="text" id="totalAmount" name="totalAmount" value="Total Amount" readonly><br>
+       
+
+    
+    <button type="submit">confirm order</button>
+
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://healthycare0011.github.io/orderconfirmed/">
+
+      </div>
+        
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 E-commerce Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript code for order page
+    // Retrieve product details from local storage, including the image URL
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const productNames = cartItems.map(item => item.name).join(', '); // Get product names as a comma-separated string
+    document.getElementById('productName').value = productNames; // Set product names to the input field
+    // Calculate total amount including shipping fee
+    const shippingFee = 0; // Example shipping fee
+    const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price), 0) + shippingFee;
+    const totalElement = document.getElementById('totalAmount');
+    totalElement.value = `৳${totalAmount.toFixed(2)}`; // Set total amount value to input field
+  </script>
+</body>
+</html>

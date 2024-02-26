@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    main {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .product-details {
+      margin: auto;
+      width: 60%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+    }
+    .add-to-cart-btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Product Details</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="product-details">
+      <h2>Product Name: Product 1</h2>
+      <img src="https://raw.githubusercontent.com/healthycare0011/photo/main/Height develop powder.jpg" alt="Product 1" width="150px" height="150px">
+      <p>Price: ৳10.00</p>
+      <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet tristique magna. Sed ut turpis a nisi posuere eleifend.</p>
+        <button onclick="addToCart('Product 1', 10.00, 'https://raw.githubusercontent.com/healthycare0011/photo/main/Height develop powder.jpg')">Add to Cart</button>
+   
+    </div>
+  </main>
+<script>
+  // Function to add item to cart
+  function addToCart(productName, price, imageUrl) {
+    const cartItem = { name: productName, price: price, image: imageUrl };
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if the item is already in the cart
+    const isAlreadyInCart = cart.some(item => item.name === productName);
+
+    if (isAlreadyInCart) {
+      alert('This item is already added to the cart.');
+    } else {
+      cart.push(cartItem);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Item added to cart successfully.');
+    }
+  }
+</script>
+</body>
+</html>

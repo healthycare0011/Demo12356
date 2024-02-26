@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    main {
+      margin: 20px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .item-details {
+      display: flex;
+      align-items: center;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .delete-button {
+      margin-left: 20px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      position: flex;
+      bottom: 0;
+      width: 100%;
+    }
+
+    #total {
+      text-align: right;
+      padding: 10px;
+    }
+
+    #buy-now {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cart</h1>
+    <nav>
+      <ul>
+        <li><a href="123.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2 id="cartTitle">Your Cart</h2>
+    <div id="cartItems">
+      <!-- Cart items will be dynamically generated here -->
+    </div>
+    <div id="shippingFee">Delivery Charge :৳150</div>
+    <div id="total"></div>
+    <div id="buy-now">
+      <button onclick="buyNow()">Buy Now</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 E-commerce Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Retrieve cart items from local storage
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Display cart items
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTitle = document.getElementById('cartTitle');
+    const totalElement = document.getElementById('total');
+
+    let totalAmount = 0;
+
+    // Initial total calculation
+    if (cartItems.length > 0) {
+      calculateTotal();
+    } else {
+      cartTitle.textContent = "Your Cart is Empty";
+    }
+
+    cartItems.forEach((item, index) => {
+      const cartItem = document.createElement('div');
+      cartItem.classList.add('cart-item');
+      cartItem.innerHTML = `
+        <div class="item-details">
+          <div class="item-info">
+            <img src="${item.image}" alt="${item.name}" style="width: 100px; height: auto;">
+            <h3>${item.name}</h3>
+            <p>Price: ৳${item.price}</p>
+          </div>
+          <button class="delete-button" onclick="confirmDelete(${index})">Delete</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(cartItem);
+      totalAmount += parseFloat(item.price);
+    });
+
+    // Function to confirm deletion
+    function confirmDelete(index) {
+      if (confirm("Are you sure you want to delete this item?")) {
+        deleteItem(index);
+      }
+    }
+
+    // Function to delete item from cart
+    function deleteItem(index) {
+      cartItems.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      location.reload(); // Refresh the page to reflect changes
+    }
+
+    // Function to calculate total
+    function calculateTotal() {
+      totalAmount = 0;
+      cartItems.forEach((item) => {
+        totalAmount += parseFloat(item.price);
+      });
+
+      // Add delivery fee only if cart is not empty
+      if (cartItems.length > 0) {
+        const deliveryFee = 150; // Example delivery fee
+        totalAmount += deliveryFee;
+      }
+
+      totalElement.textContent = `Total: ৳${totalAmount.toFixed(2)}`;
+    }
+
+    // Function to handle buy now button click
+    function buyNow() {
+      // Redirect to order page with total amount as URL parameter
+      window.location.href = `order.html?total=${totalAmount.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
